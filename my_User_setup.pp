@@ -35,13 +35,15 @@ exec { 'mydotfiles' :
 class install_dots {
   exec { 'dotinstall' :
       command => "/home/${username}/GitHub/mydotfiles/installer.sh",
-      path    => "/home/${username}/GitHub/mydotfiles/",
+      cwd          => "/home/${username}/GitHub/mydotfiles/",
+      user          => "${username}",
     }
 }
 
 
 # Invoke these new classes
 # ============ MAIN ============
+notice ( "Installing for user with username of ${username}..." )
 include my_dirs
 include rm_mydotfiles
 include my_gits
