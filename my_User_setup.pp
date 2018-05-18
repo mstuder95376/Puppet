@@ -6,11 +6,12 @@ $username = "mstuder"
 
 # =============== CLASSES ==============
 # Create GItHub directory if missing
-class my_dirs{
+class my_dirs {
     file { "/home/${username}/GitHub" :
         ensure => 'directory',
     }
 }
+
 
 class rm_mydotfiles {
     file { "/home/${username}/GitHub/mydotfiles" :
@@ -19,7 +20,8 @@ class rm_mydotfiles {
     }
 }
 
-class my_gits{
+
+class my_gits {
 # https://github.com/mstuder95376/mydotfiles.git
 # Make sure directory is not already there.
 exec { 'mydotfiles' :
@@ -27,7 +29,10 @@ exec { 'mydotfiles' :
     path    => '/usr/bin/:/bin/',
     # path    => [ '/usr/local/bin/', '/bin/' ],  # alternative syntax
   }
-  ->
+}
+
+
+class install_dots {
   exec { 'dotinstall' :
       command => 'installer.sh',
       path    => "/home/${username}/GitHub/mydotfiles/",
@@ -40,3 +45,4 @@ exec { 'mydotfiles' :
 include my_dirs
 include rm_mydotfiles
 include my_gits
+include install_dots
