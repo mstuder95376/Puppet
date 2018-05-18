@@ -34,7 +34,7 @@ exec { 'mydotfiles' :
 
 class install_dots {
   exec { 'dotinstall' :
-      command => 'installer.sh',
+      command => "/home/${username}/GitHub/mydotfiles/installer.sh",
       path    => "/home/${username}/GitHub/mydotfiles/",
     }
 }
